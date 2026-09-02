@@ -1,0 +1,6 @@
+.env
+dags/dag_teste.py
+logs/
+notebooks/
+
+*__pycache__

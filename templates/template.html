@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .tabela-estilizada {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .tabela-estilizada thead tr {
+            background-color: #3498db;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+        .tabela-estilizada th,
+        .tabela-estilizada td {
+            padding: 12px 15px;
+        }
+        .tabela-estilizada tbody tr {
+            border-bottom: 1px solid #dddddd;
+            background-color: #ffffff;
+        }
+        .tabela-estilizada tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        .tabela-estilizada tbody tr:last-of-type {
+            border-bottom: 2px solid #3498db;
+        }
+        .tabela-estilizada tbody tr:hover {
+            background-color: #e8f4f8;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ titulo }}</h1>
+    
+    <table class="tabela-estilizada">
+        <thead>
+            <tr>
+                {% for coluna in registros[0].keys() %}
+                    <th>{{ coluna }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for linha in registros %}
+                <tr>
+                    {% for valor in linha.values() %}
+                        <td>{{ valor }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
