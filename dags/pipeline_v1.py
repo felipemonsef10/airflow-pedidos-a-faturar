@@ -11,18 +11,6 @@ from etl.loads import gerar_relatorios_pdf
 from sender.whatsapp import fluxo_envio_relatorios # type: ignore
 
 
-# PG_CONN = {
-#     'user': 'airflow',
-#     'passwd': 'airflow',
-#     'host': '192.168.56.1',
-#     'port': 5432,
-#     'db': 'sistema_empresa'
-# }
-# POSTGRES_CONN_ID = 'database_postgresql_conn'
-
-# COMANDO_SQL = "select * from pedidos"
-
-
 with DAG(
     dag_id='pipeline_v1',
     description='DAG que realiza a extração no banco de dados da empresa e gera relatórios automatizados',

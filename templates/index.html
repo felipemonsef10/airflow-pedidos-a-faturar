@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Relatório de Vendas</title>
+    <title>Relatório de Pedidos a Faturar</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,6 +14,13 @@
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
+            margin-bottom: 5px;
+        }
+        .data-criacao {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-top: 6px;
+            margin-bottom: 25px;
         }
         .tabela-estilizada {
             border-collapse: collapse;
@@ -41,17 +48,28 @@
         .tabela-estilizada tbody tr:nth-of-type(even) {
             background-color: #f3f3f3;
         }
-        .tabela-estilizada tbody tr:last-of-type {
-            border-bottom: 2px solid #3498db;
-        }
         .tabela-estilizada tbody tr:hover {
             background-color: #e8f4f8;
+        }
+        /* Destaque na última linha */
+        .tabela-estilizada tbody tr:last-of-type {
+            background-color: #eaf2f8;
+            font-weight: bold;
+            color: #2c3e50;
+            border-top: 2px solid #3498db;
+            border-bottom: 2px solid #3498db;
+        }
+        .tabela-estilizada tbody tr:last-of-type:hover {
+            background-color: #d4e6f1;
         }
     </style>
 </head>
 <body>
 
-    <h1>Relatório de Vendas</h1>
+    <h1>Relatório de Pedidos a Faturar</h1>
+    
+        <p class="data-criacao">Data de criação: 02/09/2026 21:48</p>
+    
     
     <table class="tabela-estilizada">
         <thead>

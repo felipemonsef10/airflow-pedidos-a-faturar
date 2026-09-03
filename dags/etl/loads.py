@@ -2,7 +2,8 @@ import pandas as pd
 from airflow.sdk.execution_time.task_runner import RuntimeTaskInstance
 from jinja2 import Environment, FileSystemLoader
 from pathlib import Path
-import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
 import requests
 
 
@@ -27,7 +28,8 @@ def renderizar_template_jinja(dados_para_template) -> None:
     env = Environment(loader=FileSystemLoader(str(PASTA_TEMPLATES)))
     template = env.get_template(str(ARQUIVO_TEMPLATE_HTML))
     html_renderizado = template.render(
-        titulo="Relatório de Vendas",
+        data_criacao=datetime.now(tz=ZoneInfo('America/Sao_Paulo')).strftime('%d/%m/%Y %H:%M'),
+        titulo="Relatório de Pedidos a Faturar",
         registros=dados_para_template
     )
 
