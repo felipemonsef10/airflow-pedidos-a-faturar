@@ -190,8 +190,10 @@ O módulo `dags/sender/whatsapp.py` lê as credenciais abaixo a partir das **Var
 | --- | --- |
 | `idInstance` | Identificador da instância da Green API. |
 | `apiTokenInstance` | Token usado na URL de envio da Green API. |
+| `chatId` | Chat ID para o envio da mensagem da Green API. |
 
 Configure essas variáveis pela interface do Airflow antes de executar a etapa de envio. Não grave tokens diretamente no código nem no repositório.
+O fluxo percorre todos os arquivos presentes em pdfs/ e tenta enviá-los como arquivos PDF.
 
 
 ## Execução da DAG
@@ -243,7 +245,6 @@ O repositório está orientado a desenvolvimento local. O próprio `docker-compo
 
 A configuração de conexão com o banco de origem utiliza credenciais e endereço fixos no código. Recomenda-se migrar esses valores para Connections, Variables ou secrets gerenciados pelo Airflow e parametrizar o host, a porta e o banco por ambiente.
 
-O destinatário do WhatsApp está fixado em `whatsapp.py`. Para uso geral, essa informação deve ser externalizada e validada para evitar o envio acidental a um contato incorreto.
 
 A análise do código identifica imports que precisam ser revisados antes da execução em um ambiente limpo, incluindo referências a `pendulum`, `pandas`, `sqlalchemy.create_engine` e `airflow.models.Variable` que não aparecem importadas nos respectivos arquivos. Também não há um arquivo de dependências dedicado, como `requirements.txt` ou `pyproject.toml`, para declarar explicitamente bibliotecas adicionais.
 
