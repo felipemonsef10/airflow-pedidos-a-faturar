@@ -193,7 +193,6 @@ O módulo `dags/sender/whatsapp.py` lê as credenciais abaixo a partir das **Var
 
 Configure essas variáveis pela interface do Airflow antes de executar a etapa de envio. Não grave tokens diretamente no código nem no repositório.
 
-O destinatário atual está definido diretamente no código como um `chatId` de WhatsApp. Para reutilizar o projeto com outro destinatário, altere essa configuração para uma variável segura do Airflow ou para outra forma de configuração externa. O fluxo percorre todos os arquivos presentes em `pdfs/` e tenta enviá-los como arquivos PDF.
 
 ## Execução da DAG
 
