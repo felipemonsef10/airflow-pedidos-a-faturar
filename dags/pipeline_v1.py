@@ -1,14 +1,6 @@
 import pendulum
-import pandas as pd
-from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
-# from sqlalchemy_utils import database_exists, create_database
 from airflow import DAG
-from airflow.sdk import task
-from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.operators.python import PythonOperator
-from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator, SQLTableCheckOperator
-from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 import sys
 import os
@@ -16,6 +8,7 @@ sys.path.append(os.path.dirname(__file__))
 from etl.extract import carregar_dados_tabela
 from etl.transforms import tratar_dados_tabelas, gerar_indicadores
 from etl.loads import gerar_relatorios_pdf
+from sender.whatsapp import fluxo_envio_relatorios # type: ignore
 
 
 # PG_CONN = {
@@ -33,6 +26,8 @@ from etl.loads import gerar_relatorios_pdf
 with DAG(
     dag_id='pipeline_v1',
     description='DAG que realiza a extração no banco de dados da empresa e gera relatórios automatizados',
+    start_date=pendulum.datetime(2026, 9, 2, tz='America/Sao_Paulo'),
+    schedule='30 7 * * 1-5',
     catchup=False
 ) as dag:
 
@@ -70,9 +65,14 @@ with DAG(
         python_callable=gerar_relatorios_pdf,
     )
     
-        
+    task_enviar_relatorios = PythonOperator(
+        task_id='enviar_relatorios_pdf',
+        python_callable=fluxo_envio_relatorios,
+    )
+ 
+       
 [
     task_carregar_dados_tabela_produtos,
     task_carregar_dados_tabela_cidades,
     task_carregar_dados_tabela_pedidos
-] >> task_tratar_dados_tabelas >> task_gerar_indicadores >> task_gerar_relatorios_pdf
+] >> task_tratar_dados_tabelas >> task_gerar_indicadores >> task_gerar_relatorios_pdf >> task_enviar_relatorios
