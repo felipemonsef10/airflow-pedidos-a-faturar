@@ -9,7 +9,7 @@ FOLDER_PDFS = Path('pdfs')
 
 ID_INSTANCE = Variable.get("idInstance")
 API_TOKEN_INSTANCE = Variable.get("apiTokenInstance")
-CHAT_ID = '553484355709@c.us'
+CHAT_ID = Variable.get("chatId")
 
 url = "https://7103.media.greenapi.com/waInstance{}/sendFileByUpload/{}"
 
